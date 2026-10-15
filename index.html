@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8fc">
+    <meta name="description" content="Sinu rahulik ja nutikas õppeplaneerija.">
+    <title>Õpirahu — Smart Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Peamenüü">
+        <a class="brand" href="#home" aria-label="Õpirahu avaleht">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 8.5C9 6 13 6 16 8v17c-3-2-7-2-11 .5v-17ZM27 8.5C23 6 19 6 16 8v17c3-2 7-2 11 .5v-17Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 12h2m-2 4h2m6-4h2m-2 4h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <span><strong>õpirahu</strong><small>SMART STUDY PLANNER</small></span>
+        </a>
+        <div class="sidebar-label">TÖÖLAUD</div>
+        <nav class="main-nav">
+          <a class="nav-link active" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="4" rx="2"/><rect x="13.5" y="11.5" width="7" height="9" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/></svg>Ülevaade</a>
+          <a class="nav-link" href="#tasks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h11M8 12h11M8 19h11"/><path d="m3.5 5 .8.8L6 4m-2.5 8 .8.8L6 11m-2.5 8 .8.8L6 18"/></svg>Minu ülesanded <span class="nav-count" id="nav-task-count">0</span></a>
+          <a class="nav-link" href="#planner"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M7.5 3v4m9-4v4M4 9h16m-12 4h2m3 0h2m-7 3h2"/></svg>Päeva plaan</a>
+          <a class="nav-link" href="#focus"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6m-3 0v2"/></svg>Fookuse taimer</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="calm-card"><span class="calm-sparkle" aria-hidden="true">✳</span><p>Väikesed sammud viivad suurte tulemusteni.</p><span>Võta rahulikult. Sa saad hakkama.</span></div>
+          <div class="profile"><div class="avatar" aria-hidden="true">✦</div><div><strong>Sinu õpilaud</strong><small>Uus päev, uus võimalus</small></div><span class="profile-dot" aria-label="Oled siin"></span></div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="home">
+        <header class="topbar">
+          <div class="mobile-brand"><span class="brand-mark" aria-hidden="true">✳</span><strong>õpirahu</strong></div>
+          <div class="breadcrumb">Töölaud <span>/</span> <strong>Ülevaade</strong></div>
+          <div class="topbar-date"><span class="live-dot"></span><span id="top-date"></span></div>
+        </header>
+        <section class="welcome-row">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> SINU ISIKLIK ÕPIRUUM</div><h1>Tere tulemast tagasi! <span aria-hidden="true">👋</span></h1><p class="welcome-copy">Võta hetk, hinga sügavalt sisse ja vaatame, mis täna tehtud saab.</p></div>
+          <button class="button button-primary" id="add-task-shortcut" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-7-7h14"/></svg>Lisa ülesanne</button>
+        </section>
+        <section class="stats-grid" aria-label="Õppimise ülevaade">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon lavender"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h11M8 12h11M8 19h11"/><path d="m3.5 5 .8.8L6 4m-2.5 8 .8.8L6 11m-2.5 8 .8.8L6 18"/></svg></span><span class="stat-caption">KÕIK ÜLESANDED</span><span class="stat-more">•••</span></div><div class="stat-value" id="stat-total">0</div><div class="stat-note"><span class="note-dot lavender-dot"></span><span id="stat-open">0 ootel</span><span>· sinu õpiteekond</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon peach"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6m-3 0v2"/></svg></span><span class="stat-caption">ÕPPIMISAEG</span><span class="stat-more">•••</span></div><div class="stat-value"><span id="stat-hours">0</span><small> h</small></div><div class="stat-note"><span class="note-dot peach-dot"></span><span id="stat-minutes">0 min</span><span>· sel nädalal</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon mint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></span><span class="stat-caption">SEDA NÄDALAT</span><span class="stat-more">•••</span></div><div class="stat-value" id="stat-week">0%</div><div class="stat-note"><span class="note-dot mint-dot"></span><span id="stat-week-done">0 ülesannet tehtud</span><span>· tubli töö!</span></div></article>
+        </section>
+        <section class="overview-grid">
+          <article class="panel progress-panel">
+            <div class="panel-heading"><div><div class="eyebrow small-eyebrow">SINU RÜTM</div><h2>Edenemise jälgija</h2></div><span class="heading-icon" aria-hidden="true">↗</span></div>
+            <div class="progress-block"><div class="progress-label"><div><span class="progress-dot today-dot"></span><strong>Tänane eesmärk</strong></div><span id="today-fraction">0 / 0</span></div><div class="progress-track"><span class="progress-fill today-fill" id="today-progress"></span></div><div class="progress-foot"><span id="today-progress-copy">Alusta oma esimesest ülesandest</span><span id="today-percent">0%</span></div></div>
+            <div class="progress-block week-progress-block"><div class="progress-label"><div><span class="progress-dot week-dot"></span><strong>Nädala eesmärk</strong></div><span id="week-fraction">0 / 0</span></div><div class="progress-track"><span class="progress-fill week-fill" id="week-progress"></span></div><div class="progress-foot"><span id="week-progress-copy">Iga samm loeb</span><span id="week-percent">0%</span></div></div>
+            <div class="motivational-note"><span aria-hidden="true">☀</span> <span id="motivation">Iga väike samm viib sind eesmärgile lähemale.</span></div>
+          </article>
+          <article class="panel focus-panel" id="focus">
+            <div class="panel-heading"><div><div class="eyebrow small-eyebrow">RAHULIK FOKUS</div><h2>Pomodoro taimer</h2></div><span class="timer-mode-pill" id="timer-mode-label">ÕPPIMINE</span></div>
+            <div class="timer-wrap"><svg class="timer-ring" viewBox="0 0 180 180" aria-hidden="true"><circle class="timer-ring-bg" cx="90" cy="90" r="78"/><circle class="timer-ring-progress" id="timer-ring-progress" cx="90" cy="90" r="78"/></svg><div class="timer-center"><span id="timer-display">25:00</span><small id="timer-subtitle">aega keskendumiseks</small></div></div>
+            <label class="timer-task-label" for="timer-task">Seosta ülesandega <span>(valikuline)</span></label><select id="timer-task" class="timer-select"><option value="">Vali ülesanne...</option></select>
+            <div class="timer-controls"><button class="button button-primary timer-start" id="timer-start" type="button">Alusta fookust</button><button class="button button-icon" id="timer-reset" type="button" aria-label="Lähtesta taimer" title="Lähtesta taimer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg></button></div>
+            <div class="timer-hint"><span aria-hidden="true">☕</span> 25 min õppimist <span>·</span> 5 min pausi</div>
+          </article>
+        </section>
+        <section class="work-grid">
+          <article class="panel tasks-panel" id="tasks">
+            <div class="panel-heading task-heading"><div><div class="eyebrow small-eyebrow">HOIA KÕIK KONTROLLI ALL</div><h2>Minu ülesanded <span class="task-total-badge" id="task-total-badge">0</span></h2></div><button class="button button-soft" id="add-task-button" type="button"><span>+</span> Lisa uus</button></div>
+            <form class="task-form" id="task-form" hidden>
+              <div class="form-top"><div><strong>Uus ülesanne</strong><span>Pane kirja, mis vajab sinu tähelepanu.</span></div><button class="close-form" type="button" id="close-form" aria-label="Sulge vorm">×</button></div>
+              <div class="form-grid">
+                <label class="field field-wide">Ülesande nimi<input name="title" type="text" maxlength="80" placeholder="nt. Korda geomeetria valemid" required></label>
+                <label class="field">Õppeaine<input name="subject" type="text" maxlength="40" placeholder="nt. Matemaatika" required></label>
+                <label class="field">Tüüp<select name="type"><option value="Kodutöö">Kodutöö</option><option value="Kontrolltöö">Kontrolltöö</option><option value="Õppimine">Õppimine</option></select></label>
+                <label class="field">Tähtaeg<input name="dueDate" type="date" required></label>
+                <label class="field">Prioriteet<select name="priority"><option value="low">Madal</option><option value="medium" selected>Keskmine</option><option value="high">Kõrge</option></select></label>
+                <label class="field field-wide">Eeldatav õppeaeg <span class="input-suffix"><input name="estimate" type="number" min="5" max="600" step="5" value="60" required><span>minutit</span></span></label>
+              </div>
+              <div class="form-actions"><button class="button button-quiet" id="cancel-form" type="button">Tühista</button><button class="button button-primary" type="submit">Salvesta ülesanne <span aria-hidden="true">→</span></button></div>
+            </form>
+            <div class="task-toolbar"><div class="filter-tabs" role="group" aria-label="Filtreeri ülesandeid"><button class="filter-tab selected" type="button" data-filter="all">Kõik <span id="filter-all-count">0</span></button><button class="filter-tab" type="button" data-filter="open">Tegemata <span id="filter-open-count">0</span></button><button class="filter-tab" type="button" data-filter="done">Tehtud <span id="filter-done-count">0</span></button></div><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="task-search" type="search" placeholder="Otsi..." aria-label="Otsi ülesandeid"></label></div>
+            <div class="task-list" id="task-list" aria-live="polite"></div>
+          </article>
+          <article class="panel planner-panel" id="planner">
+            <div class="panel-heading"><div><div class="eyebrow small-eyebrow">SINU JÄRGMINE SAMM</div><h2>Päeva plaan</h2></div><span class="planner-date" id="planner-date"></span></div>
+            <p class="planner-intro">Tähtajad aitavad järjekorda seada. Alusta ühest väikesest sammust.</p>
+            <div class="schedule-list" id="schedule-list"></div>
+            <div class="planner-footer"><span class="auto-indicator"><span></span> Uueneb automaatselt</span><span id="planner-total"></span></div>
+          </article>
+        </section>
+        <footer class="page-footer"><span>Valmistatud rahulikuma õppimise jaoks</span><span>✳ &nbsp;Sinu tempo, sinu edu.</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
